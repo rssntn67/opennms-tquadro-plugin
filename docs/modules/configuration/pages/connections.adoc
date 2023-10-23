@@ -19,35 +19,23 @@ NOTE: The `Content-Type` of the request and response is `application/json`.
 | Method
 | Description
 
-| `/plugin/nutanix/connections`
+| `/plugin/tqradro/connections`
 | GET
 | Returns the list of configured connections.
 
-| `/plugin/nutanix/clusters/\{alias}`
-| GET
-| Returns the list of clusters.
-
-| `/plugin/nutanix/hosts/\{alias}`
-| GET
-| Returns the list of hosts.
-
-| `/plugin/nutanix/vms/\{alias}`
-| GET
-| Returns the list of vms.
-
-| `/plugin/nutanix/connections`
+| `/plugin/tqradro/connections`
 | POST
 | Adds a new connection.
 
-| `/plugin/nutanix/connections/\{alias}`
+| `/plugin/tqradro/connections/\{alias}`
 | PUT
 | Updates a configured connection.
 
-| `/plugin/nutanix/connections/\{alias}`
+| `/plugin/tqradro/connections/\{alias}`
 | DELETE
 | Delete a configured connection.
 
-| `/plugin/nutanix/connections/\{alias}`
+| `/plugin/tqradro/connections/\{alias}`
 | GET
 | Validates a configured connection.
 
@@ -62,90 +50,30 @@ ssh -p 8101 admin@localhost
 [source, console]
 .List existing connections.
 ----
-admin@opennms()> opennms-nutanix:connection-list --help
+admin@opennms()> opennms-tquadro:connection-list --help
 DESCRIPTION
-        opennms-nutanix:connection-list
+        opennms-tqradro:connection-list
 
 	List existing connections
 
 SYNTAX
-        opennms-nutanix:connection-list
+        opennms-tqradro:connection-list
 
 DETAILS
-        List all existing connections to orchestrators
-----
-
-[source, console]
-.List Clusters for connection alias.
-----
-admin@opennms()> opennms-nutanix:list-clusters --help
-DESCRIPTION
-opennms-nutanix:list-clusters
-
-	List existing clusters for connection alias
-
-SYNTAX
-opennms-nutanix:list-clusters alias
-
-ARGUMENTS
-        alias
-                Alias
-                (required)
-DETAILS
-List all existing clusters on alias orchestrator
-----
-
-[source, console]
-.List Hosts for connection alias.
-----
-admin@opennms()> opennms-nutanix:list-hosts --help
-DESCRIPTION
-opennms-nutanix:list-hosts
-
-	List existing hosts for connection alias
-
-SYNTAX
-opennms-nutanix:list-hosts alias
-
-ARGUMENTS
-        alias
-                Alias
-                (required)
-DETAILS
-List all existing hosts on alias orchestrator
-----
-
-[source, console]
-.List VMs for connection alias.
-----
-admin@opennms()> opennms-nutanix:list-vms --help
-DESCRIPTION
-opennms-nutanix:list-vms
-
-	List existing Virtual Machines for connection alias
-
-SYNTAX
-opennms-nutanix:list-vms alias
-
-ARGUMENTS
-        alias
-                Alias
-                (required)
-DETAILS
-List all existing vms on alias orchestrator
+        List all existing connections to cmdb
 ----
 
 [source, console]
 .Add a connection.
 ----
-admin@opennms()> opennms-nutanix:connection-add --help
+admin@opennms()> opennms-tqradro:connection-add --help
 DESCRIPTION
-        opennms-nutanix:connection-add
+        opennms-tqradro:connection-add
 
 	Add a connection
 
 SYNTAX
-        opennms-nutanix:connection-add [options] alias url username password length
+        opennms-tqradro:connection-add [options] alias url username password length
 
 ARGUMENTS
         alias
@@ -176,20 +104,20 @@ OPTIONS
         -i, --ignore-ssl-certificate-validation
                 Ignore ssl certificate validation
 DETAILS
-        Add a connection to a nutanix prism
+        Add a connection to a tqradro prism
 ----
 
 [source, console]
 .Edit an existing connection.
 ----
-admin@opennms()> opennms-nutanix:connection-edit --help
+admin@opennms()> opennms-tqradro:connection-edit --help
 DESCRIPTION
-        opennms-nutanix:connection-edit
+        opennms-tqradro:connection-edit
 
 	Edit a connection
 
 SYNTAX
-        opennms-nutanix:connection-edit [options] alias url username password
+        opennms-tqradro:connection-edit [options] alias url username password
 
 ARGUMENTS
         alias
@@ -218,20 +146,20 @@ OPTIONS
         -i, --ignore-ssl-certificate-validation
                 Ignore ssl certificate validation
 DETAILS
-        Edit an existing connection to a nutanix prism
+        Edit an existing connection to a tqradro prism
 ----
 
 [source, console]
 .Validate an existing connection.
 ----
-admin@opennms()> opennms-nutanix:connection-validate --help
+admin@opennms()> opennms-tqradro:connection-validate --help
 DESCRIPTION
-        opennms-nutanix:connection-validate
+        opennms-tqradro:connection-validate
 
 	Validate a connection
 
 SYNTAX
-        opennms-nutanix:connection-validate alias
+        opennms-tqradro:connection-validate alias
 
 ARGUMENTS
         alias
@@ -239,20 +167,20 @@ ARGUMENTS
                 (required)
 
 DETAILS
-        Validate an existing connection to a nutanix prism
+        Validate an existing connection to a tqradro prism
 ----
 
 [source, console]
 .Delete an existing connection.
 ----
-admin@opennms()> opennms-nutanix:connection-delete --help
+admin@opennms()> opennms-tqradro:connection-delete --help
 DESCRIPTION
-        opennms-nutanix:connection-delete
+        opennms-tqradro:connection-delete
 
 	Delete a connection
 
 SYNTAX
-        opennms-nutanix:connection-delete alias
+        opennms-tqradro:connection-delete alias
 
 ARGUMENTS
         alias
@@ -260,14 +188,14 @@ ARGUMENTS
                 (required)
 
 DETAILS
-        Deletes a connection to a nutanix orchestrator
+        Deletes a connection to a tqradro orchestrator
 ----
 
 == Examples
 
-The following example adds a connection with the alias `theAlias` and assumes that the Nutanix Prism is reachable by the URL `https://my.prism.net:9440/api/nutanix/v3` and the API-key is `tHiSiS.TheAP1Key`.
+The following example adds a connection with the alias `theAlias` and assumes that the Nutanix Prism is reachable by the URL `https://my.prism.net:9440/api/tqradro/v3` and the API-key is `tHiSiS.TheAP1Key`.
 ```
-admin@opennms()> opennms-nutanix:connection-add theAlias https://my.prism.net:9440/ TheUsername ThePassword
+admin@opennms()> opennms-tqradro:connection-add theAlias https://my.prism.net:9440/ TheUsername ThePassword
 ```
 
-NOTE: If the connection you can list the associated VM by invoking `opennms-nutanix:list-vms theAlias`.
+NOTE: If the connection you can list the associated VM by invoking `opennms-tqradro:list-vms theAlias`.

@@ -1,11 +1,9 @@
 = Introduction
 :imagesdir: ../assets/images
 
-The OpenNMS Nutanix Plugin lets you monitor the status and collect events and performance metrics of Nutanix hypervisor entities.
+The OpenNMS TQuadro Plugin lets you monitor the status of an Ip Address in TQuadro.
 
-After installing the plugin, you must use the Nutanix Prism URLs and associated API keys to add connections.
-After that, you can import the Nutanix entities into an OpenNMS requisition.
-Services will be bound for VM, hosts, and disks.
-It then collects these events and associates them with nodes in OpenNMS, as well as collecting performance metrics.
-The next section gives a brief overview of basic Nutanix terminology.
+After installing the plugin, you must use the TQuadro URLs and associated API keys to add connections.
+After that associate the connection to node and check wheter the node id address belongs to a TQuadro Asset
+The next section gives a brief overview of basic TQuadro terminology.
 Installation and configuration procedures follow in the next sections.
