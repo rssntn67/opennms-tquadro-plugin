@@ -5,19 +5,19 @@
 
 The installation of the plugin is simple.
 Just copy the provided KAR file to your OpenNMS `deploy` directory.
-The following example copies the KAR file `path/to/opennms-nutanix-plugin.kar` to the `deploy` directory assuming that OpenNMS is installed in `/opt/opennms`.
+The following example copies the KAR file `path/to/opennms-tquadro-plugin.kar` to the `deploy` directory assuming that OpenNMS is installed in `/opt/opennms`.
 
 ```
-$ cp path/to/opennms-nutanix-plugin.kar /opt/opennms/deploy/
+$ cp path/to/opennms-tquadro-plugin.kar /opt/opennms/deploy/
 ```
 
 After this step you can install the plugin in the OpenNMS Karaf shell:
 
 ```
-admin@opennms()> feature:install opennms-plugins-nutanix
+admin@opennms()> feature:install opennms-plugins-tquadro
 ```
 
-After installation, Nutanix-specific Karaf commands are available to configure the plugin.
+After installation, TQuadro-specific Karaf commands are available to configure the plugin.
 
 ## Deploy from source
 
@@ -33,11 +33,11 @@ Now you can add the repository and install the feature in the OpenNMS Karaf shel
 Replace `<VERSION>` with the version you built and want to deploy.
 
 ```
-admin@opennms()> feature:repo-add mvn:org.opennms.plugins.nutanix/karaf-features/<VERSION>/xml
-admin@opennms()> feature:install opennms-plugins-nutanix
+admin@opennms()> feature:repo-add mvn:org.opennms.plugins.tquadro/karaf-features/<VERSION>/xml
+admin@opennms()> feature:install opennms-plugins-tquadro
 ```
 
 To ensure that the feature is activated on future service restarts, add the feature to a file in `featuresBoot.d`:
 
 [source, shell]
-echo "opennms-plugins-nutanix wait-for-kar=opennms-plugins-nutanix" | sudo tee ${OPENNMS_HOME}/etc/featuresBoot.d/plugin-nutanix.boot
+echo "opennms-plugins-tquadro wait-for-kar=opennms-plugins-tquadro" | sudo tee ${OPENNMS_HOME}/etc/featuresBoot.d/plugin-tquadro.boot

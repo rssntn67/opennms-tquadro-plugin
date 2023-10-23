@@ -1,4 +1,4 @@
 = Requirements
 :imagesdir: ../assets/images
 
-The OpenNMS Nutanix Plugin can only be used with OpenNMS Horizon 31+ or OpenNMS Meridian 2023+.
+The OpenNMS TQuadro Plugin can only be used with OpenNMS Horizon 31+ or OpenNMS Meridian 2023+.

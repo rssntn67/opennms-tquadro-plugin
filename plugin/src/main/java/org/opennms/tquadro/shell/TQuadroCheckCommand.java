@@ -13,7 +13,7 @@ import org.apache.karaf.shell.support.table.Col;
 import org.apache.karaf.shell.support.table.ShellTable;
 import org.opennms.tquadro.connections.ConnectionManager;
 
-@Command(scope = "opennms-tquadro", name = "check-ip", description = "Check TQuadro Ip Asset ", detailedDescription = "Check TQuadro if Ip is holded by Asset")
+@Command(scope = "opennms-tquadro", name = "check", description = "Check Asset TQuadro Cmdb", detailedDescription = "Check TQuadro if Ip is holded by Asset")
 @Service
 public class TQuadroCheckCommand implements Action {
 
@@ -38,16 +38,30 @@ public class TQuadroCheckCommand implements Action {
             return null;
         }
 
-        final var table = new ShellTable()
-                .size(session.getTerminal().getWidth() - 1)
-                .column(new Col("asset").maxSize(36).bold(true));
 
         final var asset = client.get().getAssetByIpAddress(InetAddress.getByName(ip));
+        final var connection = this.connectionManager.getConnection(this.alias).orElseThrow();
+
+        final var table = new ShellTable()
+                .size(session.getTerminal().getWidth() - 1)
+                .column(new Col("Ip").maxSize(36).bold(true))
+                .column(new Col("Asset.id").maxSize(36))
+                .column(new Col("Asset.name").maxSize(36))
+                .column(new Col("TQuadro.Url").maxSize(36))
+                ;
+
         final var row = table.addRow();
-        row.addContent(asset);
+        row.addContent(ip);
+        if (asset == null) {
+            row.addContent("null");
+            row.addContent("null");
+        } else {
+            row.addContent(asset.id);
+            row.addContent(asset.name);
+        }
+        row.addContent(connection.getTQuadroUrl());
 
         table.print(System.out, true);
-
         return null;
     }
 }

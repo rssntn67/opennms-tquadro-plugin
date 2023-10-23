@@ -12,31 +12,19 @@ NOTE: The `Content-Type` of the request and response is `application/json`.
 | Method
 | Description
 
-| `/plugin/nutanix/\{alias}/clusters`
-| GET
-| Returns the associated clusters for a configured nutanix with alias connection.
-
-| `/plugin/nutanix/\{alias}/hosts`
-| GET
-| Returns the associated hosts for a configured nutanix with alias connection.
-
-| `/plugin/nutanix/\{alias}/vms`
-| GET
-| Returns the associated vms for a configured nutanix with alias connection.
-
-| `/plugin/nutanix/connections`
+| `/plugin/tquadro/connections`
 | GET
 | Returns the list of configured connections.
 
-| `/plugin/nutanix/connections`
+| `/plugin/tquadro/connections`
 | POST
 | Adds a new connection.
 
-| `/plugin/nutanix/connections/\{alias}`
+| `/plugin/tquadro/connections/\{alias}`
 | PUT
 | Updates a configured connection.
 
-| `/plugin/nutanix/connections/\{alias}`
+| `/plugin/tquadro/connections/\{alias}`
 | GET
 | Validates a configured connection.
 
@@ -44,71 +32,12 @@ NOTE: The `Content-Type` of the request and response is `application/json`.
 
 == Examples
 
-=== Retrieve vms for a given prism connection
-
-.Request
-[source, console]
-----
-curl -X GET -u admin:admin http://localhost:8980/opennms/rest/plugin/nutanix/vms/prismAlias
-----
-
-.Response
-[source, json]
-----
-[
-  {
-    "enterpriseId": "78a92010-9085-4d9c-9537-92eab2522697",
-    "id": 342,
-    "networkId": 1,
-    "gatewayPoolId": 2,
-    "bastionState": "UNCONFIGURED",
-    "alertsEnabled": true,
-    "operatorAlertsEnabled": true,
-    "name": "RALEIGH_LAB",
-    "domain": "rdulab",
-    "accountNumber": "RDU-foo",
-    "description": "",
-    "address": "PO Box 362",
-    "city": "Apex",
-    "state": "North Carolina",
-    "zip": "27502",
-    "country": "US",
-    "latitude": 35.770000,
-    "longitude": -78.640000,
-    "timezone": "America/New_York",
-    "locale": "en-US"
-  },
-  {
-    "enterpriseId": "f9adcb3e-21be-451d-997f-fd21e429129c",
-    "id": 213,
-    "networkId": 1,
-    "gatewayPoolId": 2,
-    "bastionState": "UNCONFIGURED",
-    "alertsEnabled": true,
-    "operatorAlertsEnabled": true,
-    "name": "OTTAWA_LAB",
-    "domain": "yowlab",
-    "accountNumber": "YOW-bar",
-    "description": "",
-    "address": "300 March Rd, Suite 600",
-    "city": "Kanata",
-    "state": "Ontario",
-    "zip": "K2K 2E2",
-    "country": "CA",
-    "latitude": 45.300000,
-    "longitude": -75.916000,
-    "timezone": "America/Toronto",
-    "locale": "en-US"
-  }
-]
-----
-
 === Retrieve a list of configured connections
 
 .Request
 [source, console]
 ----
-curl -u admin:admin http://localhost:8980/opennms/rest/nutanix/connections
+curl -u admin:admin http://localhost:8980/opennms/rest/tquadro/connections
 ----
 
 .Response
@@ -117,16 +46,14 @@ curl -u admin:admin http://localhost:8980/opennms/rest/nutanix/connections
 [
   {
     "alias": "arsinfo",
-    "prismUrl": "https://nutanix.arsinfo.it:9440/",
-    "username": "nutanixuser",
-    "length": 20,
+    "tquadroUrl": "https://tquadro.arsinfo.it:9440/",
+    "username": "tquadrouser",
     "ignoreSslCertificateValidation": true
   },
   {
     "alias": "example",
-    "prismUrl": "https://nutanix.example.it:9440/",
+    "tquadroUrl": "https://tquadro.example.it:9440/",
     "username": "user",
-    "length": 20,
     "ignoreSslCertificateValidation": true
   }
 ]
@@ -137,7 +64,7 @@ curl -u admin:admin http://localhost:8980/opennms/rest/nutanix/connections
 .Request
 [source, console]
 ----
-curl -H "Content-type: application/json" -X POST -u admin:admin http://localhost:8980/opennms/rest/nutanix/connections --data '{"alias":"anotherAlias","prismUrl":"https://nutanix.arsinfo.it:9440","username":"username","password":"password","lenght":50,"ignoreSslCertificateValidation": true}'
+curl -H "Content-type: application/json" -X POST -u admin:admin http://localhost:8980/opennms/rest/tquadro/connections --data '{"alias":"anotherAlias","tquadroUrl":"https://tquadro.arsinfo.it:9440","username":"username","password":"password","ignoreSslCertificateValidation": true}'
 ----
 
 .Response
@@ -151,7 +78,7 @@ Connection successfully added
 .Request
 [source, console]
 ----
-curl -H "Content-type: application/json" -X PUT -u admin:admin http://localhost:8980/opennms/rest/nutanix/connections/arsinfo --data '{"prismUrl":"https://nutanix2.arsinfo.it:9440","username":"username2","password":"password","lenght":50,"ignoreSslCertificateValidation": true}'
+curl -H "Content-type: application/json" -X PUT -u admin:admin http://localhost:8980/opennms/rest/tquadro/connections/arsinfo --data '{"tquadroUrl":"https://tquadro2.arsinfo.it:9440","username":"username2","password":"password","ignoreSslCertificateValidation": true}'
 ----
 
 .Response
@@ -165,7 +92,7 @@ Connection successfully updated
 .Request
 [source, console]
 ----
-curl -X GET -u admin:admin http://localhost:8980/opennms/rest/nutanix/connections/arsinfo
+curl -X GET -u admin:admin http://localhost:8980/opennms/rest/tquadro/connections/arsinfo
 ----
 
 .Response
@@ -173,7 +100,7 @@ curl -X GET -u admin:admin http://localhost:8980/opennms/rest/nutanix/connection
 ----
 {
 "alias": "arsinfo",
-"prismUrl": "https://nutanix.arsinfo.it:9440",
+"tquadroUrl": "https://tquadro.arsinfo.it:9440",
 "valid": true
 }
 ----

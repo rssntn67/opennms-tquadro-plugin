@@ -1,6 +1,6 @@
 <poller-configuration xmlns="http://xmlns.opennms.org/xsd/config/poller/api">
     <package name="tquadro">
-        <filter>IPADDR != '255.255.255.255'</filter>
+        <filter>catincTQuadroCmdb</filter>
 
         <rrd step="300">
             <rra>RRA:AVERAGE:0.5:1:2016</rra>
@@ -11,7 +11,7 @@
         </rrd>
 
         <service name="TQuadro" interval="300000">
-            <parameter key="alias" value="${tquadro:alias}"/>
+            <parameter key="alias" value="${requisition:tquadro.alias}"/>
         </service>
 
         <downtime begin="0" end="300000" interval="60000"/><!-- 60s, 0, 5m -->

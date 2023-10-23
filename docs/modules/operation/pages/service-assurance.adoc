@@ -1,12 +1,7 @@
 = Service Assurance
 :imagesdir: ../assets/images
 
-Various service monitors will be bound to the imported Nutanix entities in OpenNMS:
+A simple service monitors will be bound to check if the opennms node is bounded into TQuadro Cmdb Asset:
 
-## VMs
-
-## Hosts
-
-## Disks
-
-## Clusters
+## Asset
+Verify if ipAddress is listed into TQuadro Cmdb Asset
