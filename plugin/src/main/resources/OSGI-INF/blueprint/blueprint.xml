@@ -1,0 +1,58 @@
+<blueprint
+        xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.3.0"
+        xsi:schemaLocation="
+                http://www.osgi.org/xmlns/blueprint/v1.0.0
+                http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+
+                http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.3.0
+                http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.3.0.xsd
+">
+
+<!-- Pull in service implementations from the OSGi registry -->
+    <reference id="nodeDao" interface="org.opennms.integration.api.v1.dao.NodeDao" availability="optional"/>
+    <reference id="clientProvider" interface="org.opennms.tquadro.client.api.ClientProvider" />
+
+    <bean id="clientManager" class="org.opennms.tquadro.clients.ClientManager">
+        <argument ref="clientProvider" />
+    </bean>
+    <service ref="clientManager" interface="org.opennms.tquadro.clients.ClientManager"/>
+
+    <bean id="connectionManager" class="org.opennms.tquadro.connections.ConnectionManager">
+        <argument>
+            <reference interface="org.opennms.integration.api.v1.runtime.RuntimeInfo" availability="optional"/>
+        </argument>
+        <argument>
+            <reference interface="org.opennms.integration.api.v1.scv.SecureCredentialsVault" availability="optional"/>
+        </argument>
+        <argument ref="clientManager" />
+    </bean>
+    <service ref="connectionManager" interface="org.opennms.tquadro.connections.ConnectionManager"/>
+
+
+
+    <!--    Rest-->
+    <bean id="tQuadroRestService" class="org.opennms.tquadro.rest.impl.TQuadroRestServiceImpl">
+        <argument ref="connectionManager"/>
+    </bean>
+    <service interface="org.opennms.tquadro.rest.api.TQuadroRestService" ref="TQuadroRestService">
+        <service-properties>
+            <entry key="application-path" value="/rest/plugin"/>
+        </service-properties>
+    </service>
+
+    <!--    Service Pollers -->
+    <service interface="org.opennms.integration.api.v1.pollers.ServicePollerFactory">
+        <bean class="org.opennms.tquadro.pollers.TQuadroPollerFactory">
+            <argument ref="clientManager"/>
+            <argument ref="connectionManager"/>
+        </bean>
+    </service>
+
+    <!-- Configuration -->
+    <bean id="tQuadroPollerConfig" class="org.opennms.tquadro.configuration.TQuadroPollerConfigurationExtension"/>
+    <service ref="tQuadroPollerConfig"
+             interface="org.opennms.integration.api.v1.config.poller.PollerConfigurationExtension"/>
+
+</blueprint>

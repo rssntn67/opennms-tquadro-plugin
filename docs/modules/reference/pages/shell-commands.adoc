@@ -1,0 +1,158 @@
+= Useful Karaf Shell Commands
+:imagesdir: ../assets/images
+
+== opennms-nutanix:connection-add
+
+Add a connection to a Nutanix Prism.
+
+Syntax: `opennms-nutanix:connection-add alias url apiKey`
+
+.Arguments
+[options="header, autowidth", cols="2,1"]
+|===
+
+| Argument
+| Description
+
+| alias
+| Alias for this connection
+
+| url
+| Nutanix Prism URL
+
+| username
+| Nutanix Prism Username
+
+| password
+| Nutanix Prism Password
+
+|===
+
+== opennms-nutanix:list-clusters
+
+List all clusters for a given nutanix prism connection alias.
+
+Syntax: `opennms-nutanix:list-clusters alias`
+
+.Arguments
+[options="header, autowidth", cols="2,1"]
+|===
+
+| Argument
+| Description
+
+| alias
+| Alias for this connection
+
+|===
+
+.Example output for a connection `prismAlias`
+```
+admin@opennms()> list-clusters prismAlias
+                         UUID        │ Name    │ Domain   │ Description
+───────────────────────────────────────────────┼──────────┼────────────┼
+00059dd3-26be-0d72-5228-ac1f6b357222 │ CLU_TEST│ tbd      │ tbd
+admin@opennms()>
+```
+
+== opennms-nutanix:list-hosts
+
+List all hosts for a given nutanix prism connection alias.
+
+Syntax: `opennms-nutanix:list-hosts alias`
+
+.Arguments
+[options="header, autowidth", cols="2,1"]
+|===
+
+| Argument
+| Description
+
+| alias
+| Alias for this connection
+
+|===
+
+.Example output for a connection `prismAlias`
+```
+admin@opennms()> list-hosts prismAlias
+                         UUID        │ Name       │ Domain   │ Description
+──────────────────────────────────────────────────┼──────────┼────────────┼
+cd6c6e07-39f2-4381-ba5d-ec854a76b02d │ NTX02B-TEST│ tbd      │ tbd
+admin@opennms()>
+```
+
+== opennms-nutanix:list-vms
+
+List all virtual machines for a given nutanix prism connection alias.
+
+Syntax: `opennms-nutanix:list-vms alias`
+
+.Arguments
+[options="header, autowidth", cols="2,1"]
+|===
+
+| Argument
+| Description
+
+| alias
+| Alias for this connection
+
+|===
+
+.Example output for a connection `prismAlias`
+```
+admin@opennms()> list-hosts prismAlias
+                         UUID        │ Name       │ Domain   │ Description
+──────────────────────────────────────────────────┼──────────┼────────────┼
+6cf9a98b-4954-4f85-9174-705fcfabc1cd │ VM001-TEST │ tbd      │ tbbd
+admin@opennms()>
+```
+
+== opennms:import-requisition
+
+Import the requisition from a given URL.
+
+Syntax: `opennms:import-requisition [options] nutanix alias=aAlias [foreignSource=AForS] [location=ALoc] [importVms=true] [importHosts=false] [importClusters=false] [importAllVms=false]`
+
+.Arguments
+[options="header, autowidth", cols="2,1"]
+|===
+
+| Argument
+| Description
+
+| nutanix
+| Type of requisition.
+Use `nutanix` for importing Nutanix Virtual Machines, Hosts and Clusters
+
+
+| foreignSource
+| the foreign source where to store nodes, not required. Defaults to nutanix-\{alias\}
+
+| location
+| the monitoring location, not required. Defaults to default location
+
+| importVms
+| `importVms=true` is default value set `importVms=false` to not import Vms
+
+| importHosts
+| set `importHosts=true` to import Hosts
+
+| importClusters
+| set `importClusters=true` to import Clusters
+
+|===
+
+.Options
+[options="header, autowidth", cols="2,1"]
+|===
+
+| Option
+| Description
+
+| -r, --rescan
+| Specify rescanExisting value.
+Valid values : 'true', 'false', 'dbonly'
+
+|===

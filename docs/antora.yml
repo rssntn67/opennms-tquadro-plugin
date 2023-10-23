@@ -1,0 +1,5 @@
+name: tquadro
+version: '1.0.0-SNAPSHOT'
+title: OpenNMS TQuadro Plugin
+nav:
+  - modules/ROOT/nav.adoc

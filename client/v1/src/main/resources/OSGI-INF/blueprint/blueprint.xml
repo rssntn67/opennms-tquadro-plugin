@@ -1,0 +1,4 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+    <bean id="clientProvider" class="org.opennms.tquadro.client.v1.V1ApiClientProvider"/>
+    <service ref="clientProvider" interface="org.opennms.tquadro.client.api.V1ClientProvider"/>
+</blueprint>

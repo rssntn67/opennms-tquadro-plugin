@@ -1,0 +1,32 @@
+package org.opennms.tquadro.shell.connections;
+
+import org.apache.karaf.shell.api.action.Action;
+import org.apache.karaf.shell.api.action.Argument;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.Completion;
+import org.apache.karaf.shell.api.action.lifecycle.Reference;
+import org.apache.karaf.shell.api.action.lifecycle.Service;
+import org.opennms.tquadro.connections.ConnectionManager;
+import org.opennms.tquadro.shell.AliasCompleter;
+
+@Command(scope = "opennms-tquadro", name = "connection-delete", description = "Delete a connection", detailedDescription = "Deletes a connection to a nutanix prism")
+@Service
+public class DeleteConnectionCommand implements Action {
+
+    @Reference
+    private ConnectionManager connectionManager;
+
+    @Argument(name = "alias", description = "Connection alias to delete", required = true)
+    @Completion(AliasCompleter.class)
+    public String alias = null;
+
+    @Override
+    public Object execute() {
+        if (this.connectionManager.deleteConnection(alias)) {
+            System.out.println("Connection deleted");
+        } else {
+            System.out.println("Connection not found");
+        }
+        return null;
+    }
+}
