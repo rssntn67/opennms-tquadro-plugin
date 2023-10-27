@@ -15,7 +15,7 @@ public interface ApiClientService {
      */
     Asset getAssetByIpAddress(InetAddress address) throws TQuadroApiException;
 
-    void createAssetByIpAddress(InetAddress address) throws TQuadroApiException;
+    Asset createAsset(Asset asset) throws TQuadroApiException;
 
     void updateDiscovedAssetById(Integer assetId) throws TQuadroApiException;
 
