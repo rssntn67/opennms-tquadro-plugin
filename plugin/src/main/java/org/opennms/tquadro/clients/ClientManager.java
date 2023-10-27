@@ -21,7 +21,7 @@ public class ClientManager {
     }
     public Optional<ConnectionValidationError> validate(final ApiClientCredentials credentials) {
         boolean validated = clientProvider.validate(credentials);
-        LOG.info("validate: {}, version {} - {}", credentials,clientProvider.getApiVersion().version,validated);
+        LOG.info("validate: {}, - {}", credentials,validated);
         if (validated) {
             return Optional.empty();
         }
@@ -29,7 +29,7 @@ public class ClientManager {
     }
 
 
-    public ApiClientService getClient(ApiClientCredentials credentials) throws TQuadroApiException {
+    public ApiClientService getClient(ApiClientCredentials credentials) {
         return clientProvider.client(credentials);
     }
 }

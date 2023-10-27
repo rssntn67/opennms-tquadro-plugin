@@ -85,11 +85,10 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
             LOG.debug("Factory::getRuntimeAttributes -> connection: {}, class {}", connection, getPollerClassName());
 
             final var attrs = ImmutableMap.<String,String>builder();
-            attrs.put(ConnectionManager.PRISM_URL_KEY, connection.getTQuadroUrl());
+            attrs.put(ConnectionManager.TQUADRO_URL_KEY, connection.getTQuadroUrl());
             attrs.put(ConnectionManager.USERNAME_KEY, connection.getUsername());
             attrs.put(ConnectionManager.PASSWORD_KEY, connection.getPassword());
             attrs.put(ConnectionManager.IGNORE_SSL_CERTIFICATE_VALIDATION_KEY, String.valueOf(connection.isIgnoreSslCertificateValidation()));
-            attrs.put(ConnectionManager.LENGTH_KEY, String.valueOf(connection.getLength()));
             return attrs.build();
         }
     }
@@ -102,8 +101,8 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
         }
 
         public ApiClientCredentials getClientCredentials() {
-            final var prismUrl = Objects.requireNonNull(this.request.getPollerAttributes().get(ConnectionManager.PRISM_URL_KEY),
-                                                               "Missing attribute: " + ConnectionManager.PRISM_URL_KEY);
+            final var prismUrl = Objects.requireNonNull(this.request.getPollerAttributes().get(ConnectionManager.TQUADRO_URL_KEY),
+                                                               "Missing attribute: " + ConnectionManager.TQUADRO_URL_KEY);
             final var username = Objects.requireNonNull(this.request.getPollerAttributes().get(ConnectionManager.USERNAME_KEY),
                                                       "Missing attribute: " + ConnectionManager.USERNAME_KEY);
 

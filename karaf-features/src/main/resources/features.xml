@@ -9,7 +9,7 @@
         <bundle dependency="true">mvn:io.dropwizard.metrics/metrics-core/${metrics.version}</bundle>
         <bundle dependency="true">mvn:javax.ws.rs/javax.ws.rs-api/${jaxrs.version}</bundle>
 
-        <feature version="${project.version}">opennms-plugins-tquadro-client-v3</feature>
+        <feature version="${project.version}">opennms-plugins-tquadro-client-v1</feature>
 
         <bundle>mvn:org.opennms.plugins.tquadro/tquadro-plugin/${project.version}</bundle>
     </feature>
