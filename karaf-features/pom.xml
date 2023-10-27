@@ -7,7 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>karaf-features</artifactId>
-    <name>OpenNMS :: Plugins :: Nutanix Plugin :: Karaf Features</name>
+    <name>OpenNMS :: Plugins :: TQuadro Plugin :: Karaf Features</name>
     <packaging>pom</packaging>
 
     <build>
