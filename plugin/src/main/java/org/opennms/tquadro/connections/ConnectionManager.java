@@ -25,9 +25,6 @@ public class ConnectionManager {
     private static final String PREFIX = "tquadro_connection_";
     public static final String TQUADRO_URL_KEY = "tquadroUrl";
     public static final String IGNORE_SSL_CERTIFICATE_VALIDATION_KEY = "ignoreSslCertificateValidation";
-
-    public static final String ALIAS_KEY = "alias";
-
     public static final String USERNAME_KEY = "username";
     public static final String PASSWORD_KEY = "password";
 
@@ -121,15 +118,12 @@ public class ConnectionManager {
         this.ensureCore();
 
         final var connection = this.getConnection(alias);
-        if (connection.isEmpty()) {
-            return Optional.empty();
-        }
+        return connection.map(value -> this.clientManager.getClient(asCredentials(value)));
 
-        return Optional.of(this.clientManager.getClient(asNutanixCredentials(connection.get())));
     }
 
 
-    private static ApiClientCredentials asNutanixCredentials(Connection connection) {
+    private static ApiClientCredentials asCredentials(Connection connection) {
         return ApiClientCredentials.builder()
                 .withUsername(connection.getUsername())
                 .withPassword(connection.getPassword())
@@ -243,7 +237,7 @@ public class ConnectionManager {
 
         @Override
         public Optional<ConnectionValidationError> validate() {
-            return ConnectionManager.this.clientManager.validate(ConnectionManager.asNutanixCredentials(this));
+            return ConnectionManager.this.clientManager.validate(ConnectionManager.asCredentials(this));
         }
 
         @Override

@@ -39,6 +39,7 @@ public class TQuadroApiV1TestIT {
         OpenNmsApi openNmsApi = new OpenNmsApi(getApiClient());
         try {
             AssetOpenNMS asset = openNmsApi.apiOpenNMSAssetIpAddressGet("10.28.1.270");
+            //  200 Asset
             System.out.println(asset.getIpAddress());
             System.out.println(asset.getAssetId());
             System.out.println(asset.getHostname());
@@ -48,7 +49,6 @@ public class TQuadroApiV1TestIT {
             //  401 Not Authorized
             //  404 Asset Not Found
             //  405 Method Not Allowed
-            //  200 Asset
             //  500 Internal Server Error
                 System.out.println(e.getCode());
                 System.out.println(e.getResponseHeaders());

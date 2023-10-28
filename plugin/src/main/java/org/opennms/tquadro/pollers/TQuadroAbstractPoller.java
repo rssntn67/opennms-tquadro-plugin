@@ -9,11 +9,8 @@ import org.opennms.integration.api.v1.pollers.PollerRequest;
 import org.opennms.integration.api.v1.pollers.PollerResult;
 import org.opennms.integration.api.v1.pollers.ServicePoller;
 import org.opennms.integration.api.v1.pollers.ServicePollerFactory;
-import org.opennms.integration.api.v1.pollers.Status;
-import org.opennms.integration.api.v1.pollers.immutables.ImmutablePollerResult;
 import org.opennms.tquadro.client.api.ApiClientCredentials;
 import org.opennms.tquadro.client.api.ApiClientService;
-import org.opennms.tquadro.client.api.TQuadroApiException;
 import org.opennms.tquadro.clients.ClientManager;
 import org.opennms.tquadro.connections.ConnectionManager;
 import org.slf4j.Logger;
@@ -25,24 +22,22 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
     private static final Logger LOG = LoggerFactory.getLogger(TQuadroAbstractPoller.class);
     private final ClientManager clientManager;
 
+    public static final String ALIAS_KEY = "alias";
+    public static final String CREATE_KEY = "create";
+
+    public static final String LABEL_KEY = "label";
+
+
     protected TQuadroAbstractPoller(final ClientManager client) {
         this.clientManager = Objects.requireNonNull(client);
     }
 
-    protected abstract CompletableFuture<PollerResult> poll(final Context context) throws TQuadroApiException;
+    protected abstract CompletableFuture<PollerResult> poll(final Context context);
 
     @Override
     public final CompletableFuture<PollerResult> poll(final PollerRequest pollerRequest) {
-        try {
             LOG.debug("poll: {} {}", pollerRequest.getAddress().getHostAddress(), pollerRequest.getServiceName());
             return this.poll(new Context(pollerRequest));
-        } catch (final TQuadroApiException e) {
-            LOG.warn("TQuadro communication failed", e);
-            return CompletableFuture.completedFuture(ImmutablePollerResult.newBuilder()
-                                                                          .setStatus(Status.Down)
-                                                                          .setReason(e.getMessage())
-                                                                          .build());
-        }
     }
 
     public static abstract class Factory<T extends TQuadroAbstractPoller> implements ServicePollerFactory<T> {
@@ -79,12 +74,16 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
 
         @Override
         public final Map<String, String> getRuntimeAttributes(final PollerRequest pollerRequest) {
-            final var alias = Objects.requireNonNull(pollerRequest.getPollerAttributes().get(ConnectionManager.ALIAS_KEY), "Missing property: " + ConnectionManager.ALIAS_KEY);
+            final var alias = Objects.requireNonNull(pollerRequest.getPollerAttributes().get(ALIAS_KEY), "Missing property: " + ALIAS_KEY);
+            final var create = Objects.requireNonNull(pollerRequest.getPollerAttributes().get(CREATE_KEY), "Missing property: " + CREATE_KEY);
+            final var label = Objects.requireNonNull(pollerRequest.getPollerAttributes().get(LABEL_KEY), "Missing property: " + LABEL_KEY);
             final var connection = this.connectionManager.getConnection(alias)
                                                          .orElseThrow(() -> new NullPointerException("Connection not found for alias: " + alias));
             LOG.debug("Factory::getRuntimeAttributes -> connection: {}, class {}", connection, getPollerClassName());
 
             final var attrs = ImmutableMap.<String,String>builder();
+            attrs.put(CREATE_KEY,create);
+            attrs.put(LABEL_KEY,label);
             attrs.put(ConnectionManager.TQUADRO_URL_KEY, connection.getTQuadroUrl());
             attrs.put(ConnectionManager.USERNAME_KEY, connection.getUsername());
             attrs.put(ConnectionManager.PASSWORD_KEY, connection.getPassword());
@@ -95,11 +94,23 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
 
     public class Context {
         public final PollerRequest request;
-
         public Context(final PollerRequest request) {
             this.request = Objects.requireNonNull(request);
+
+        }
+        public String getLabel() {
+            final var label= Objects.requireNonNull(this.request.getPollerAttributes().get(LABEL_KEY),
+                    "Missing attribute: " + LABEL_KEY);
+            LOG.debug("Context::getLabel: {}", label);
+            return label;
         }
 
+        public boolean getCreate() {
+            final var create= Objects.requireNonNull(this.request.getPollerAttributes().get(CREATE_KEY),
+                    "Missing attribute: " + CREATE_KEY);
+            LOG.debug("Context::getCreate: {}", create);
+            return Boolean.parseBoolean(create);
+        }
         public ApiClientCredentials getClientCredentials() {
             final var prismUrl = Objects.requireNonNull(this.request.getPollerAttributes().get(ConnectionManager.TQUADRO_URL_KEY),
                                                                "Missing attribute: " + ConnectionManager.TQUADRO_URL_KEY);
@@ -125,7 +136,7 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
             return credentials;
         }
 
-        public ApiClientService client() throws TQuadroApiException {
+        public ApiClientService client() {
             return TQuadroAbstractPoller.this.clientManager.getClient(this.getClientCredentials());
         }
     }

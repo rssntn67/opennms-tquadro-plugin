@@ -10,6 +10,15 @@ public class Asset {
     public final String hostname;
     public final InetAddress ipAddress;
 
+    @Override
+    public String toString() {
+        return "Asset{" +
+                "assetId=" + assetId +
+                ", hostname='" + hostname + '\'' +
+                ", ipAddress=" + ipAddress +
+                '}';
+    }
+
     public Asset(Builder builder) {
         this.assetId = Objects.requireNonNull(builder.assetId);
         this.hostname = builder.hostname;
