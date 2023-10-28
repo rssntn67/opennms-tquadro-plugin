@@ -24,7 +24,7 @@ public class ApiClientExtension extends ApiClient {
     }
 
     private boolean ignoreSslCertificateValidation=false;
-    protected void ignoreCertificateValididation(ClientBuilder clientBuilder) {
+    protected void ignoreCertificateValidation(ClientBuilder clientBuilder) {
         SSLContext sslContext = null;
         try {
             sslContext = SSLContext.getInstance("SSL");
@@ -74,28 +74,11 @@ public class ApiClientExtension extends ApiClient {
         }
         ClientBuilder builder =  ClientBuilder.newBuilder();
         if (ignoreSslCertificateValidation) {
-            ignoreCertificateValididation(builder);
+            ignoreCertificateValidation(builder);
         }
         performAdditionalClientConfiguration(clientConfig);
         builder.withConfig(clientConfig);
         return builder.build();
-    }
-
-    @Override
-    public void performAdditionalClientConfiguration(ClientConfig config) {
-        super.performAdditionalClientConfiguration(config);
-    }
-    @Override
-    public String selectHeaderContentType(String[] contentTypes) {
-        if (contentTypes.length == 0 || contentTypes[0].equals("*/*")) {
-            return "application/json";
-        }
-        for (String contentType : contentTypes) {
-            if (isJsonMime(contentType)) {
-                return contentType;
-            }
-        }
-        return contentTypes[0];
     }
 
 }
