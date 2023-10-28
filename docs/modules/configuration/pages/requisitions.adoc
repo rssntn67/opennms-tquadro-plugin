@@ -2,17 +2,26 @@
 :imagesdir: ../assets/images
 
 In order to monitor the status of an ip address into tquadro cmdb we need to associate to a node
-tha category `TQuadroCmdb`. and a connection alias for showing the .
-Only nodes with such a category will be checked whether they are asset into tquadro cmdb.
+tha Service with Name `TQuadro`.
+Only nodes with Ipaddress with bounded TQuadro will be checked whether they are listed as asset into tquadro cmdb.
+To add the TQuadro Service to node ip Interface just add manually the Service to Node->Interface in Requisition.
+Another option could be to set up a Detector (ICMP) to add the TQuadro Service to all Ip Interface provided or discovered.
 
 To identify the tquadro cmdb target to which the node should be checked against you have to associate a connection alias
-to the node.
+to the node, therefore we need to associate a connection alias for the TQuadro Cmdb Server. Set the meta-data tquadro.alias
+in Context Node or Requisition to the proper value (The connection Alias should match a name of a TQuadro definied connection)
 
-We suggest to create a requisition for a given connection alias.
-Add to the requisition a policy for adding node metadata and set metadata.key='tquadro.alias' and metadata.value='connAlias'
-Add to the requisition a policy for adding node category `TQuadroCmdb`.
+You can optionally create the Asset on Cmdb if it does not exist, setting the meta-data tquadro.create to true in Node or in Requisition Context
+The plugin provides a shell command to verify if an ip address is into tquadro cmdb using the meta-data provided in Node or Requisition Context
 
-The plugin provides a shell command to verify if an ip address is into tquadro cmdb
+To add the tquadro.alias meta-data in Context Node just set the proper valie editing the node into Requisition.
+To add the tquadro.create meta-data in Context Node just set the value to true editing the node into Requisition.
+
+In case we want to add tquadro.alias the meta-data in context Requisition
+Add to the requisition a policy for adding node metadata and set metadata.key='tquadro.alias' and metadata.value='tqa'
+
+In case we want to add tquadro.create the meta-data in context Requisition
+Add to the requisition a policy for adding node metadata and set metadata.key='tquadro.create' and metadata.value='true'
 
 [source, console]
 .Check Ip presence in Tquadro Cmdb.

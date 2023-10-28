@@ -14,10 +14,8 @@
             <parameter key="create" value="${node:tquadro.create}|${requisition:tquadro.create}|false"/>
         </service>
 
-        <downtime begin="0" end="300000" interval="60000"/><!-- 60s, 0, 5m -->
-        <downtime begin="300000" end="43200000" interval="300000"/><!-- 5m, 5m, 12h -->
-        <downtime begin="43200000" end="432000000" interval="600000"/><!-- 10m, 12h, 5d -->
-        <downtime begin="432000000" interval="3600000"/><!-- 1h, 5d -->
+        <downtime begin="0" end="43200000" interval="3600000"/><!-- 0, 12h, 1h -->
+        <downtime begin="43200000" interval="1440000"/><!-- 12h, 4h -->
     </package>
 
     <monitor service="TQuadro"

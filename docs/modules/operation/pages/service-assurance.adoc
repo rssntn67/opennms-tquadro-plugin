@@ -3,5 +3,22 @@
 
 A simple service monitors will be bound to check if the opennms node is bounded into TQuadro Cmdb Asset:
 
-## Asset
-Verify if ipAddress is listed into TQuadro Cmdb Asset
+##  TQuadro Asset Monitor
+This Monitor Verify ipAddress is listed into TQuadro Cmdb Asset
+The service TQuadro must be manually provided to the node.
+The polling interval is 4 hours
+For the TQuadro Monitor work properly set alias property for the Cmdb asset Connection providing a tquadro.alias
+metadata in context node  or in  context requisition.
+Optionally the TQuadro Service Monitor can save a new discovered Ip as Asset into TQuadro Cmdb, to create the Asset set create property providing a tquadro.create
+metadata in context node  or in  context requisition. Context Node has higher priority over Context Requisition
+
+See * xref:configuration:requisitions.adoc[Requisitions] for how to add node or requisition metadata.
+
+Follow a poller-configuration extension useful to understand how parameter and meta-data are used:
+
+
+        <service name="TQuadro" interval="1440000">
+            <parameter key="label" value="${node:label}"/>
+            <parameter key="alias" value="${node:tquadro.alias}|${requisition:tquadro.alias}|tquadro"/>
+            <parameter key="create" value="${node:tquadro.create}|${requisition:tquadro.create}|false"/>
+        </service>
