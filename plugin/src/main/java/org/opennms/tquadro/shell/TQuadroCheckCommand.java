@@ -56,8 +56,8 @@ public class TQuadroCheckCommand implements Action {
             row.addContent("null");
             row.addContent("null");
         } else {
-            row.addContent(asset.id);
-            row.addContent(asset.name);
+            row.addContent(asset.assetId);
+            row.addContent(asset.hostname);
         }
         row.addContent(connection.getTQuadroUrl());
 

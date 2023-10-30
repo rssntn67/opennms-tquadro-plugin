@@ -11,6 +11,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
 import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.client.HttpUrlConnectorProvider;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.logging.LoggingFeature;
@@ -79,6 +80,10 @@ public class ApiClientExtension extends ApiClient {
         performAdditionalClientConfiguration(clientConfig);
         builder.withConfig(clientConfig);
         return builder.build();
+    }
+    @Override
+    protected void performAdditionalClientConfiguration(ClientConfig clientConfig) {
+        clientConfig.property(ClientProperties.SUPPRESS_HTTP_COMPLIANCE_VALIDATION, true);        // No-op extension point
     }
 
 }

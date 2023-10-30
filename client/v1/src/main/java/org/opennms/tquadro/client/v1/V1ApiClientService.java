@@ -56,7 +56,7 @@ public class V1ApiClientService implements ApiClientService {
     @Override
     public void updateDiscovedAssetById(Integer assetId) throws TQuadroApiException {
         try {
-            openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(assetId);
+            openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(assetId,"");
         } catch (ApiException e) {
             throw new TQuadroApiException(e.getMessage(), e, e.getCode(),e.getResponseHeaders(), e.getResponseBody());
         }

@@ -6,7 +6,9 @@ import java.util.Set;
 import org.opennms.tquadro.client.api.ApiClientCredentials;
 import org.opennms.tquadro.client.api.ApiClientProvider;
 import org.opennms.tquadro.client.api.ApiClientService;
+import org.opennms.tquadro.client.v1.api.AccountApi;
 import org.opennms.tquadro.client.v1.handler.ApiException;
+import org.opennms.tquadro.client.v1.model.AuthenticationUser;
 import org.opennms.tquadro.client.v1.model.LoginAPIViewModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,12 +27,12 @@ public class V1ApiClientProvider implements ApiClientProvider {
     }
 
     private String authenticate(ApiClientExtension apiClient, ApiClientCredentials credentials) {
-        AccountApiExtension accountApi = new AccountApiExtension(apiClient);
+        AccountApi accountApi = new AccountApi(apiClient);
         LoginAPIViewModel login = new LoginAPIViewModel();
         login.setUserName(credentials.username);
         login.setPassword(credentials.password);
         try {
-            AuthenticationToken token = accountApi.getAuthorizationToken(login);
+            AuthenticationUser token = accountApi.apiAccountLoginPost(login);
             credentialAuthenticatedHashes.add(credentials.hashCode());
             LOG.info("authenticate success for user: {}, on {}", apiClient.getBasePath(), login.getUserName());
             return token.getToken();
