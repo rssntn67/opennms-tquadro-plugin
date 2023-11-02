@@ -18,7 +18,7 @@ import org.opennms.tquadro.client.api.TQuadroApiException;
 import org.opennms.tquadro.rest.dto.ConnectionDTO;
 import org.opennms.tquadro.rest.dto.ConnectionListElementDTO;
 
-@Path("/tquadro")
+@Path("tquadro")
 public interface TQuadroRestService {
 
     @GET
