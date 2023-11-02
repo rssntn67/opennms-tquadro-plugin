@@ -12,7 +12,7 @@
 
 <!-- Pull in service implementations from the OSGi registry -->
     <reference id="nodeDao" interface="org.opennms.integration.api.v1.dao.NodeDao" availability="optional"/>
-    <reference id="clientProvider" interface="org.opennms.tquadro.client.api.ClientProvider" />
+    <reference id="clientProvider" interface="org.opennms.tquadro.client.api.ApiClientProvider" />
 
     <bean id="clientManager" class="org.opennms.tquadro.clients.ClientManager">
         <argument ref="clientProvider" />
