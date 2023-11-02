@@ -27,7 +27,7 @@ public class TQuadroCheckCommand implements Action {
     @Completion(AliasCompleter.class)
     private String alias = null;
 
-    @Argument(name = "ip", description = "Ip Address", required = true)
+    @Argument(index = 1, name = "ip", description = "Ip Address", required = true)
     private String ip = null;
 
     @Override

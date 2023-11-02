@@ -37,7 +37,7 @@ public class V1ApiClientProvider implements ApiClientProvider {
             LOG.info("authenticate success for user: {}, on {}", apiClient.getBasePath(), login.getUserName());
             return token.getToken();
         } catch (ApiException e) {
-            LOG.info("authenticate failed for user: {}, on {} -> {}", apiClient.getBasePath(), login.getUserName(), e.getMessage(), e);
+            LOG.info("authenticate failed for user: {}, on {} -> {}", login.getUserName(), apiClient.getBasePath(), e.getMessage(), e);
         }
         return "invalid-token";
     }
