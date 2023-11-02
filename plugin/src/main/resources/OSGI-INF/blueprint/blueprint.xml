@@ -38,7 +38,7 @@
     </bean>
     <service interface="org.opennms.tquadro.rest.api.TQuadroRestService" ref="TQuadroRestService">
         <service-properties>
-            <entry key="application-path" value="/rest/plugin"/>
+            <entry key="application-path" value="/rest"/>
         </service-properties>
     </service>
 
