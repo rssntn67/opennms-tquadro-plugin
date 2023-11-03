@@ -33,12 +33,12 @@
 
 
     <!--    Rest-->
-    <bean id="tQuadroRestService" class="org.opennms.tquadro.rest.impl.TQuadroRestServiceImpl">
+    <bean id="tquadroRestService" class="org.opennms.tquadro.rest.impl.TQuadroRestServiceImpl">
         <argument ref="connectionManager"/>
     </bean>
-    <service interface="org.opennms.tquadro.rest.api.TQuadroRestService" ref="tQuadroRestService">
+    <service interface="org.opennms.tquadro.rest.api.TQuadroRestService" ref="tquadroRestService">
         <service-properties>
-            <entry key="application-path" value="/rest"/>
+            <entry key="application-path" value="/rest" />
         </service-properties>
     </service>
 
