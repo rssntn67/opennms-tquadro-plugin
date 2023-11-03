@@ -4,22 +4,20 @@
     <feature name="opennms-plugins-tquadro" description="OpenNMS :: Plugins :: TQuadro Plugin" version="${project.version}">
         <feature dependency="true">aries-blueprint</feature>
         <feature dependency="true">shell</feature>
-
-        <feature version="${jackson.version}" dependency="true">jackson</feature>
         <bundle dependency="true">mvn:org.apache.commons/commons-jexl3/${jexl.version}</bundle>
         <bundle dependency="true">mvn:io.dropwizard.metrics/metrics-core/${metrics.version}</bundle>
         <bundle dependency="true">mvn:javax.ws.rs/javax.ws.rs-api/2.1.1</bundle>
-        <feature version="${project.version}">opennms-plugins-tquadro-client-v1</feature>
+        <feature dependency="true" version="${project.version}">opennms-plugins-tquadro-client-v1</feature>
 
         <bundle>mvn:org.opennms.plugins.tquadro/tquadro-plugin/${project.version}</bundle>
     </feature>
 
-    <feature name="guava" description="guava" version="${guava.version}">
+    <feature name="guava" description="OpenNMS :: Plugins :: TQuadro Guava" version="${guava.version}">
         <bundle dependency="true">mvn:com.google.guava/guava/${guava.version}</bundle>
         <bundle dependency="true">mvn:com.google.guava/failureaccess/1.0.1</bundle>
     </feature>
 
-    <feature name="jackson" description="jackson" version="${jackson.version}">
+    <feature name="jackson" description="OpenNMS :: Plugins :: TQuadro Jackson" version="${jackson.version}">
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
@@ -28,7 +26,7 @@
         <bundle dependency="true">mvn:com.fasterxml.jackson.module/jackson-module-jaxb-annotations/${jackson.version}</bundle>
     </feature>
 
-    <feature name="opennms-plugins-tquadro-client-v1" description="TQuadro API v3 client" version="${project.version}">
+    <feature name="opennms-plugins-tquadro-client-v1" description="OpenNMS :: Plugins :: TQuadro API v3 client" version="${project.version}">
         <feature dependency="true">aries-blueprint</feature>
         <feature version="${guava.version}" dependency="true">guava</feature>
         <feature version="${jackson.version}" dependency="true">jackson</feature>
