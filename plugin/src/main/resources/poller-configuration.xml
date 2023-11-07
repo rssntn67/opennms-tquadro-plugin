@@ -11,7 +11,7 @@
         <service name="TQuadro" interval="1440000">
             <parameter key="label" value="${node:label}"/>
             <parameter key="alias" value="${requisition:tquadro.alias|tquadro}"/>
-            <parameter key="create" value="${requisition:tquadro.create|false"/>
+            <parameter key="create" value="${requisition:tquadro.create|false}"/>
         </service>
 
         <downtime begin="0" end="43200000" interval="3600000"/><!-- 0, 12h, 1h -->
