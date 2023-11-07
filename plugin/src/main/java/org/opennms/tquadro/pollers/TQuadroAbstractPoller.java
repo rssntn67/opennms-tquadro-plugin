@@ -75,8 +75,11 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
         @Override
         public final Map<String, String> getRuntimeAttributes(final PollerRequest pollerRequest) {
             final var alias = Objects.requireNonNull(pollerRequest.getPollerAttributes().get(ALIAS_KEY), "Missing property: " + ALIAS_KEY);
+            LOG.debug("Factory::getRuntimeAttributes -> alias: {}, class {}", alias, getPollerClassName());
             final var create = Objects.requireNonNull(pollerRequest.getPollerAttributes().get(CREATE_KEY), "Missing property: " + CREATE_KEY);
+            LOG.debug("Factory::getRuntimeAttributes -> create: {}, class {}", create, getPollerClassName());
             final var label = Objects.requireNonNull(pollerRequest.getPollerAttributes().get(LABEL_KEY), "Missing property: " + LABEL_KEY);
+            LOG.debug("Factory::getRuntimeAttributes -> label: {}, class {}", label, getPollerClassName());
             final var connection = this.connectionManager.getConnection(alias)
                                                          .orElseThrow(() -> new NullPointerException("Connection not found for alias: " + alias));
             LOG.debug("Factory::getRuntimeAttributes -> connection: {}, class {}", connection, getPollerClassName());
