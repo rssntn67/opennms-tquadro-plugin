@@ -32,7 +32,7 @@ public class TQuadroPoller extends TQuadroAbstractPoller {
                         .build());
         } catch (TQuadroApiException e) {
             if (e.getCode() == 404) {
-                LOG.info("poll:{}:Down. Asset not found on {}",
+                LOG.info("poll: {}: Down. Asset not found on {}",
                         context.request.getAddress().getHostAddress(),
                         context.getClientCredentials().tquadroUrl
                         );
