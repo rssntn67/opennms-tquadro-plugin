@@ -19,6 +19,6 @@ Follow a poller-configuration extension useful to understand how parameter and m
 
         <service name="TQuadro" interval="1440000">
             <parameter key="label" value="${node:label}"/>
-            <parameter key="alias" value="${node:tquadro.alias}|${requisition:tquadro.alias}|tquadro"/>
-            <parameter key="create" value="${node:tquadro.create}|${requisition:tquadro.create}|false"/>
+            <parameter key="alias" value="${requisition:tquadro.aliasx|tquadro}"/>
+            <parameter key="create" value="${requisition:tquadro.create|false}"/>
         </service>
