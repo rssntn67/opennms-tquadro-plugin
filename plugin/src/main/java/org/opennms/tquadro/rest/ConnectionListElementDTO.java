@@ -1,18 +1,12 @@
-package org.opennms.tquadro.rest.dto;
+package org.opennms.tquadro.rest;
 
 import lombok.Data;
 
-/**
- *  DTO for connection information received by the API
- */
 @Data
-public class ConnectionDTO {
+public class ConnectionListElementDTO {
     private String alias;
     private String prismUrl;
     private String username;
-    private String password;
-
     private Integer length;
     private Boolean ignoreSslCertificateValidation;
-
 }

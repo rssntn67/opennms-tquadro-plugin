@@ -1,4 +1,4 @@
-package org.opennms.tquadro.rest.dto;
+package org.opennms.tquadro.rest;
 
 import lombok.Data;
 

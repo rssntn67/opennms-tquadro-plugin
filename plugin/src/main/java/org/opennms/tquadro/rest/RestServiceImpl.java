@@ -1,25 +1,25 @@
-package org.opennms.tquadro.rest.impl;
+package org.opennms.tquadro.rest;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import javax.ws.rs.core.Response;
 
 import org.opennms.tquadro.connections.ConnectionManager;
-import org.opennms.tquadro.rest.api.TQuadroRestService;
-import org.opennms.tquadro.rest.dto.ConnectionDTO;
-import org.opennms.tquadro.rest.dto.ConnectionListElementDTO;
-import org.opennms.tquadro.rest.dto.ConnectionStateDTO;
 
-public class TQuadroRestServiceImpl implements TQuadroRestService {
+public class RestServiceImpl implements RestService {
 
     private final ConnectionManager connectionManager;
 
-    public TQuadroRestServiceImpl(final ConnectionManager connectionManager) {
+    public RestServiceImpl(final ConnectionManager connectionManager) {
         this.connectionManager = Objects.requireNonNull(connectionManager);
     }
 
+    @Override
+    public Response ping() {
+            return Response.ok("pong").build();
+    }
+
+    /*
     @Override
     public List<ConnectionListElementDTO> getConnectionList() {
         return this.connectionManager.getAliases().stream()
@@ -133,4 +133,6 @@ public class TQuadroRestServiceImpl implements TQuadroRestService {
                     .build();
         }
     }
+
+     */
 }
