@@ -1,4 +1,4 @@
-package org.opennms.tquadro.rest;
+package org.opennms.tquadro.plugin;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
