@@ -24,8 +24,13 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
 
     public static final String ALIAS_KEY = "alias";
     public static final String CREATE_KEY = "create";
-
     public static final String LABEL_KEY = "label";
+
+    public static final String SYS_OBJECT_ID_KEY = "sys-object-id";
+    public static final String SYS_NAME_KEY = "sys-name";
+    public static final String SYS_LOCATION_KEY = "sys-location";
+    public static final String SYS_CONTACT_KEY = "sys-contact";
+    public static final String SYS_DESCRIPTION_KEY = "sys-description";
 
 
     protected TQuadroAbstractPoller(final ClientManager client) {
@@ -84,6 +89,7 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
                                                          .orElseThrow(() -> new NullPointerException("Connection not found for alias: " + alias));
             LOG.debug("Factory::getRuntimeAttributes -> connection: {}, class {}", connection, getPollerClassName());
 
+
             final var attrs = ImmutableMap.<String,String>builder();
             attrs.put(CREATE_KEY,create);
             attrs.put(LABEL_KEY,label);
@@ -91,6 +97,26 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
             attrs.put(ConnectionManager.USERNAME_KEY, connection.getUsername());
             attrs.put(ConnectionManager.PASSWORD_KEY, connection.getPassword());
             attrs.put(ConnectionManager.IGNORE_SSL_CERTIFICATE_VALIDATION_KEY, String.valueOf(connection.isIgnoreSslCertificateValidation()));
+            final var sysoid = pollerRequest.getPollerAttributes().get(SYS_OBJECT_ID_KEY);
+            if (sysoid != null) {
+                attrs.put(SYS_OBJECT_ID_KEY,sysoid);
+            }
+            final var sysname = pollerRequest.getPollerAttributes().get(SYS_NAME_KEY);
+            if (sysname != null) {
+                attrs.put(SYS_NAME_KEY,sysname);
+            }
+            final var syscontact = pollerRequest.getPollerAttributes().get(SYS_CONTACT_KEY);
+            if (syscontact != null) {
+                attrs.put(SYS_CONTACT_KEY,syscontact);
+            }
+            final var syslocation = pollerRequest.getPollerAttributes().get(SYS_LOCATION_KEY);
+            if (syslocation != null) {
+                attrs.put(SYS_LOCATION_KEY,syslocation);
+            }
+            final var sysdescription = pollerRequest.getPollerAttributes().get(SYS_DESCRIPTION_KEY);
+            if (sysdescription != null) {
+                attrs.put(SYS_DESCRIPTION_KEY,sysdescription);
+            }
             return attrs.build();
         }
     }
@@ -106,6 +132,26 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
                     "Missing attribute: " + LABEL_KEY);
             LOG.debug("Context::getLabel: {}", label);
             return label;
+        }
+
+        public String getSysOid() {
+            return Objects.requireNonNullElse(this.request.getPollerAttributes().get(SYS_OBJECT_ID_KEY), "");
+        }
+
+        public String getSysname() {
+            return Objects.requireNonNullElse(this.request.getPollerAttributes().get(SYS_NAME_KEY), "");
+        }
+
+        public String getSysContact() {
+            return Objects.requireNonNullElse( this.request.getPollerAttributes().get(SYS_CONTACT_KEY), "");
+        }
+
+        public String getSysLocation() {
+            return Objects.requireNonNullElse(this.request.getPollerAttributes().get(SYS_LOCATION_KEY), "");
+        }
+
+        public String getSysDescription() {
+            return Objects.requireNonNullElse(this.request.getPollerAttributes().get(SYS_DESCRIPTION_KEY), "");
         }
 
         public boolean getCreate() {

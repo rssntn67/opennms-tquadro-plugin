@@ -6,9 +6,16 @@ import java.util.Objects;
 
 public class Asset {
     public final Integer assetId;
-
     public final String hostname;
     public final InetAddress ipAddress;
+
+    public final String systemName;
+    public final String systemOid;
+    public final String systemDescription;
+    public final String systemContact;
+
+    public final String systemLocation;
+
 
     @Override
     public String toString() {
@@ -16,6 +23,11 @@ public class Asset {
                 "assetId=" + assetId +
                 ", hostname='" + hostname + '\'' +
                 ", ipAddress=" + ipAddress +
+                ", systemName='" + systemName + '\'' +
+                ", systemOid='" + systemOid + '\'' +
+                ", systemDescription='" + systemDescription + '\'' +
+                ", systemContact='" + systemContact + '\'' +
+                ", systemLocation='" + systemLocation + '\'' +
                 '}';
     }
 
@@ -23,6 +35,11 @@ public class Asset {
         this.assetId = Objects.requireNonNull(builder.assetId);
         this.hostname = builder.hostname;
         this.ipAddress = Objects.requireNonNull(builder.ipAddress);
+        this.systemOid = builder.systemOid;
+        this.systemContact= builder.systemContact;
+        this.systemLocation = builder.systemLocation;
+        this.systemName = builder.systemName;
+        this.systemDescription = builder.systemDescription;
     }
 
 
@@ -32,6 +49,13 @@ public class Asset {
 
         private String hostname;
         private InetAddress ipAddress;
+
+        private String systemName;
+        private String systemOid;
+        private String systemDescription;
+        private String systemContact;
+
+        private String systemLocation;
 
         private Builder() {
         }
@@ -43,6 +67,31 @@ public class Asset {
 
         public Asset.Builder withHostname(String hostname) {
             this.hostname = hostname;
+            return this;
+        }
+
+        public Asset.Builder withSystemName(String systemName) {
+            this.systemName = systemName;
+            return this;
+        }
+
+        public Asset.Builder withSystemOid(String systemOid) {
+            this.systemOid = systemOid;
+            return this;
+        }
+
+        public Asset.Builder withSystemContact(String systemContact) {
+            this.systemContact = systemContact;
+            return this;
+        }
+
+        public Asset.Builder withSystemLocation(String systemLocation) {
+            this.systemLocation = systemLocation;
+            return this;
+        }
+
+        public Asset.Builder withSystemDescription(String systemDescription) {
+            this.systemDescription = systemDescription;
             return this;
         }
 

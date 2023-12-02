@@ -42,6 +42,11 @@ public class TQuadroPoller extends TQuadroAbstractPoller {
                             .withAssetId(0)
                             .withIpAddress(context.request.getAddress())
                             .withHostname(context.getLabel())
+                            .withSystemOid(context.getSysOid())
+                            .withSystemName(context.getSysname())
+                            .withSystemContact(context.getSysContact())
+                            .withSystemLocation(context.getSysLocation())
+                            .withSystemDescription(context.getSysDescription())
                             .build(),
                             api
                     );

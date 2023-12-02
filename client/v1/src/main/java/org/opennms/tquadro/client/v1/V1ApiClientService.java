@@ -40,11 +40,21 @@ public class V1ApiClientService implements ApiClientService {
             body.setAssetId(asset.assetId);
             body.setHostname(asset.hostname);
             body.setIpAddress(asset.ipAddress.getHostAddress());
+            body.setContactSNMP(asset.systemContact);
+            body.setLocationSNMP(asset.systemLocation);
+            body.setNameSNMP(asset.systemName);
+            body.setSysObjectIdSNMP(asset.systemOid);
+            body.descriptionSNMP(asset.systemDescription);
             AssetOpenNMS saved = openNmsApi.apiOpenNMSAssetPost(body);
             return Asset.builder()
                     .withAssetId(saved.getAssetId())
                     .withHostname(saved.getHostname())
                     .withIpAddress(InetAddress.getByName(saved.getIpAddress()))
+                    .withSystemContact(saved.getContactSNMP())
+                    .withSystemDescription(saved.getDescriptionSNMP())
+                    .withSystemName(saved.getNameSNMP())
+                    .withSystemOid(saved.getSysObjectIdSNMP())
+                    .withSystemLocation(saved.getLocationSNMP())
                     .build();
         } catch (ApiException e) {
             throw new TQuadroApiException(e.getMessage(), e, e.getCode(),e.getResponseHeaders(), e.getResponseBody());
@@ -56,7 +66,7 @@ public class V1ApiClientService implements ApiClientService {
     @Override
     public void updateDiscovedAssetById(Integer assetId) throws TQuadroApiException {
         try {
-            openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(assetId,"");
+            openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(assetId);
         } catch (ApiException e) {
             throw new TQuadroApiException(e.getMessage(), e, e.getCode(),e.getResponseHeaders(), e.getResponseBody());
         }
