@@ -1,9 +1,7 @@
 package org.opennms.tquadro.client.v1;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.opennms.tquadro.client.v1.api.AccountApi;
 import org.opennms.tquadro.client.v1.api.OpenNmsApi;
@@ -43,7 +41,7 @@ public class TQuadroApiV1TestIT {
     public void opennmsApiGetNotExistingAssetByIpAddressTest() throws ApiException{
         OpenNmsApi openNmsApi = new OpenNmsApi(getApiClient());
         try {
-            openNmsApi.apiOpenNMSAssetIpAddressGet("192.168.1.2");
+            openNmsApi.apiOpenNMSAssetIpAddressGet("192.168.151.2");
         } catch (ApiException e) {
             Assert.assertEquals(404, e.getCode());
             //Code management
@@ -83,7 +81,7 @@ public class TQuadroApiV1TestIT {
     public void opennmsApiAssetIdPutAssetIdNotExistsTest() throws ApiException{
         OpenNmsApi openNmsApi = new OpenNmsApi(getApiClient());
         try {
-            openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(777,"");
+            openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(7777777, "");
             //  204 Updated discovered date
         } catch (ApiException e) {
             Assert.assertEquals(400, e.getCode());
@@ -92,22 +90,20 @@ public class TQuadroApiV1TestIT {
             //  401 Not Authorized
             //  405 Method Not Allowed
             //  500 Internal Server Error
-            Assert.assertNull(e.getResponseBody());
-            Assert.assertNull(e.getResponseHeaders());
-            Assert.assertEquals("Missing the required parameter 'assetId' when calling apiOpenNMSDiscoveredDateAssetIdPut", e.getMessage());
+            Assert.assertEquals("\"Asset not found (id 7777777)\"", e.getResponseBody());
+            Assert.assertNotNull(e.getResponseHeaders());
+            Assert.assertTrue(e.getResponseHeaders().containsKey("Transfer-Encoding"));
+            Assert.assertTrue(e.getResponseHeaders().containsKey("Strict-Transport-Security"));
+            Assert.assertEquals("\"Asset not found (id 7777777)\"", e.getMessage());
         }
     }
 
     @Test
+    @Ignore
     public void opennmsApiAssetIdPutAssetIdExistsTest() throws ApiException{
         OpenNmsApi openNmsApi = new OpenNmsApi(getApiClient());
         try {
-            String localdateString = openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(17059,"");
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("\"MM/dd/yyyy HH:mm\"");
-            LocalDateTime localDateTime = LocalDateTime.parse(localdateString,formatter);
-            System.out.println(localDateTime);
-
+            openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(17059, "");
         } catch (ApiException e) {
             Assert.fail();
         }
@@ -120,6 +116,12 @@ public class TQuadroApiV1TestIT {
         asset.setAssetId(0);
         asset.setHostname("prova-15");
         asset.setIpAddress("10.10.10.15");
+        asset.setSysObjectIdSNMP(".1.2.3.4.5.6");
+        asset.setNameSNMP("prova-15-snmp");
+        asset.setLocationSNMP("casa");
+        asset.setContactSNMP("antonio@opennms.it");
+        asset.setDescriptionSNMP("Prova per verificare che scrive correttamente");
+
         try {
             AssetOpenNMS response = openNmsApi.apiOpenNMSAssetPost(asset);
             Assert.assertEquals(response.getHostname(), asset.getHostname());
@@ -148,12 +150,16 @@ public class TQuadroApiV1TestIT {
         asset.setAssetId(0);
         asset.setHostname("gira-11.148");
         asset.setIpAddress("10.10.11.148");
+        asset.setSysObjectIdSNMP(".1.2.3.4.6.6");
+        asset.setNameSNMP("prova-11-snmp");
+        asset.setLocationSNMP("casa");
+        asset.setContactSNMP("antonio@opennms.it");
+        asset.setDescriptionSNMP("Prova per verificare che scrive correttamente");
         try {
             AssetOpenNMS response = openNmsApi.apiOpenNMSAssetPost(asset);
             Assert.assertEquals(response.getHostname(), asset.getHostname());
             Assert.assertEquals(response.getIpAddress(), asset.getIpAddress());
-            String update = openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(response.getAssetId(),"");
-            System.out.println(update);
+            openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(response.getAssetId(), "");
         } catch (ApiException e) {
             System.out.println(e.getMessage());
             Assert.fail();

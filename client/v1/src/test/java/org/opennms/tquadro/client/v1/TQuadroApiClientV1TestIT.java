@@ -1,17 +1,7 @@
 package org.opennms.tquadro.client.v1;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import org.junit.Assert;
 import org.junit.Test;
 import org.opennms.tquadro.client.api.ApiClientCredentials;
-import org.opennms.tquadro.client.v1.api.AccountApi;
-import org.opennms.tquadro.client.v1.api.OpenNmsApi;
-import org.opennms.tquadro.client.v1.handler.ApiException;
-import org.opennms.tquadro.client.v1.model.AssetOpenNMS;
-import org.opennms.tquadro.client.v1.model.AuthenticationUser;
-import org.opennms.tquadro.client.v1.model.LoginAPIViewModel;
 
 public class TQuadroApiClientV1TestIT {
 
