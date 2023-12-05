@@ -1,6 +1,8 @@
 package org.opennms.tquadro.plugin;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.ws.rs.core.Response;
 
@@ -19,7 +21,6 @@ public class RestServiceImpl implements RestService {
             return Response.ok("pong").build();
     }
 
-    /*
     @Override
     public List<ConnectionListElementDTO> getConnectionList() {
         return this.connectionManager.getAliases().stream()
@@ -133,6 +134,4 @@ public class RestServiceImpl implements RestService {
                     .build();
         }
     }
-
-     */
 }

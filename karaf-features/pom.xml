@@ -84,9 +84,6 @@
                             </framework>
                             <features>
                                 <feature>opennms-plugins-tquadro</feature>
-                                <feature>opennms-plugins-tquadro-client-v1</feature>
-                                <feature>guava</feature>
-                                <feature>jackson</feature>
                             </features>
                         </configuration>
                     </execution>
@@ -111,7 +108,6 @@
             <type>xml</type>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.opennms.plugins.tquadro</groupId>
             <artifactId>tquadro-plugin</artifactId>
