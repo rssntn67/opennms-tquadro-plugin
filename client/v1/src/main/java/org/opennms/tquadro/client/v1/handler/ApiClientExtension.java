@@ -1,4 +1,4 @@
-package org.opennms.tquadro.client.v1;
+package org.opennms.tquadro.client.v1.handler;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;

@@ -7,6 +7,7 @@ import org.opennms.tquadro.client.api.ApiClientService;
 import org.opennms.tquadro.client.api.TQuadroApiException;
 import org.opennms.tquadro.client.api.model.Asset;
 import org.opennms.tquadro.client.v1.api.OpenNmsApi;
+import org.opennms.tquadro.client.v1.handler.ApiClientExtension;
 import org.opennms.tquadro.client.v1.handler.ApiException;
 import org.opennms.tquadro.client.v1.model.AssetOpenNMS;
 
