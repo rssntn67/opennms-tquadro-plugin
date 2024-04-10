@@ -79,7 +79,7 @@ public class TQuadroPoller extends TQuadroAbstractPoller {
             Asset saved = api.createAsset(asset);
             LOG.info("Asset Created {}", saved);
         } catch (TQuadroApiException e) {
-            LOG.error("cannot create {}", asset);
+            LOG.error("cannot create {}", asset, e);
         }
     }
 

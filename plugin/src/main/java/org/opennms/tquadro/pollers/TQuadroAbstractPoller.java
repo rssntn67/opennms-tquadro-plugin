@@ -98,22 +98,27 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
             attrs.put(ConnectionManager.PASSWORD_KEY, connection.getPassword());
             attrs.put(ConnectionManager.IGNORE_SSL_CERTIFICATE_VALIDATION_KEY, String.valueOf(connection.isIgnoreSslCertificateValidation()));
             final var sysoid = pollerRequest.getPollerAttributes().get(SYS_OBJECT_ID_KEY);
+            LOG.debug("Factory::getRuntimeAttributes -> sysoid: {}, class {}", sysoid, getPollerClassName());
             if (sysoid != null) {
                 attrs.put(SYS_OBJECT_ID_KEY,sysoid);
             }
             final var sysname = pollerRequest.getPollerAttributes().get(SYS_NAME_KEY);
+            LOG.debug("Factory::getRuntimeAttributes -> sysname: {}, class {}", sysname, getPollerClassName());
             if (sysname != null) {
                 attrs.put(SYS_NAME_KEY,sysname);
             }
             final var syscontact = pollerRequest.getPollerAttributes().get(SYS_CONTACT_KEY);
+            LOG.debug("Factory::getRuntimeAttributes -> syscontact: {}, class {}", syscontact, getPollerClassName());
             if (syscontact != null) {
                 attrs.put(SYS_CONTACT_KEY,syscontact);
             }
             final var syslocation = pollerRequest.getPollerAttributes().get(SYS_LOCATION_KEY);
+            LOG.debug("Factory::getRuntimeAttributes -> syslocation: {}, class {}", syslocation, getPollerClassName());
             if (syslocation != null) {
                 attrs.put(SYS_LOCATION_KEY,syslocation);
             }
             final var sysdescription = pollerRequest.getPollerAttributes().get(SYS_DESCRIPTION_KEY);
+            LOG.debug("Factory::getRuntimeAttributes -> sysdescription: {}, class {}", sysdescription, getPollerClassName());
             if (sysdescription != null) {
                 attrs.put(SYS_DESCRIPTION_KEY,sysdescription);
             }
@@ -135,23 +140,33 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
         }
 
         public String getSysOid() {
-            return Objects.requireNonNullElse(this.request.getPollerAttributes().get(SYS_OBJECT_ID_KEY), "");
+            final var sysoid = Objects.requireNonNullElse(this.request.getPollerAttributes().get(SYS_OBJECT_ID_KEY), "");
+            LOG.debug("Context::getSysOid: {}", sysoid);
+            return sysoid;
         }
 
         public String getSysname() {
-            return Objects.requireNonNullElse(this.request.getPollerAttributes().get(SYS_NAME_KEY), "");
+            final var sysname = Objects.requireNonNullElse(this.request.getPollerAttributes().get(SYS_NAME_KEY), "");
+            LOG.debug("Context::getSysname: {}", sysname);
+            return sysname;
         }
 
         public String getSysContact() {
-            return Objects.requireNonNullElse( this.request.getPollerAttributes().get(SYS_CONTACT_KEY), "");
+            final var sysContact = Objects.requireNonNullElse( this.request.getPollerAttributes().get(SYS_CONTACT_KEY), "");
+            LOG.debug("Context::getSysContact: {}", sysContact);
+            return sysContact;
         }
 
         public String getSysLocation() {
-            return Objects.requireNonNullElse(this.request.getPollerAttributes().get(SYS_LOCATION_KEY), "");
+            final var sysLocation = Objects.requireNonNullElse(this.request.getPollerAttributes().get(SYS_LOCATION_KEY), "");
+            LOG.debug("Context::getSysLocation: {}", sysLocation);
+            return sysLocation;
         }
 
         public String getSysDescription() {
-            return Objects.requireNonNullElse(this.request.getPollerAttributes().get(SYS_DESCRIPTION_KEY), "");
+            var sysDescription = Objects.requireNonNullElse(this.request.getPollerAttributes().get(SYS_DESCRIPTION_KEY), "");
+            LOG.debug("Context::getSysDescription: {}", sysDescription);
+            return sysDescription;
         }
 
         public boolean getCreate() {
@@ -160,6 +175,7 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
             LOG.debug("Context::getCreate: {}", create);
             return Boolean.parseBoolean(create);
         }
+
         public ApiClientCredentials getClientCredentials() {
             final var prismUrl = Objects.requireNonNull(this.request.getPollerAttributes().get(ConnectionManager.TQUADRO_URL_KEY),
                                                                "Missing attribute: " + ConnectionManager.TQUADRO_URL_KEY);
