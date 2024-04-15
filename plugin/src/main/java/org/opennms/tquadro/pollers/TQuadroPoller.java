@@ -51,14 +51,14 @@ public class TQuadroPoller extends TQuadroAbstractPoller {
                             .build(),
                             api
                     );
-                    return CompletableFuture.completedFuture(ImmutablePollerResult.newBuilder()
+                }
+                return CompletableFuture.completedFuture(ImmutablePollerResult.newBuilder()
                             .setStatus(Status.Down)
                             .setReason("No Asset Entity for ip address: "
                                     + context.request.getAddress().getHostAddress()
                                     + " on: "
                                     + context.getClientCredentials().tquadroUrl)
                             .build());
-                }
             }
             LOG.error("poll:{}:Unknown. Got HTTP {} on {} with message: {}",
                     context.request.getAddress().getHostAddress(),
