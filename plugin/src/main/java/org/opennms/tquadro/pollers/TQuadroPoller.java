@@ -47,6 +47,7 @@ public class TQuadroPoller extends TQuadroAbstractPoller {
                             .withSystemContact(context.getSysContact())
                             .withSystemLocation(context.getSysLocation())
                             .withSystemDescription(context.getSysDescription())
+                            .withArea(context.getArea())
                             .build(),
                             api
                     );

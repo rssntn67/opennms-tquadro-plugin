@@ -33,6 +33,9 @@ public class AssetOpenNMS {
   @JsonProperty("descriptionSNMP")
   private String descriptionSNMP = null;
 
+  @JsonProperty("area")
+  private String area = null;
+
   public AssetOpenNMS assetId(Integer assetId) {
     this.assetId = assetId;
     return this;
@@ -152,6 +155,14 @@ public class AssetOpenNMS {
     this.contactSNMP = contactSNMP;
   }
 
+  public String getArea() {
+    return area;
+  }
+
+  public void setArea(String area) {
+    this.area = area;
+  }
+
   public AssetOpenNMS descriptionSNMP(String descriptionSNMP) {
     this.descriptionSNMP = descriptionSNMP;
     return this;
@@ -186,12 +197,13 @@ public class AssetOpenNMS {
         Objects.equals(this.sysObjectIdSNMP, assetOpenNMS.sysObjectIdSNMP) &&
         Objects.equals(this.locationSNMP, assetOpenNMS.locationSNMP) &&
         Objects.equals(this.contactSNMP, assetOpenNMS.contactSNMP) &&
+        Objects.equals(this.area, assetOpenNMS.area) &&
         Objects.equals(this.descriptionSNMP, assetOpenNMS.descriptionSNMP);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(assetId, ipAddress, hostname, nameSNMP, sysObjectIdSNMP, locationSNMP, contactSNMP, descriptionSNMP);
+    return Objects.hash(assetId, ipAddress, hostname, nameSNMP, sysObjectIdSNMP, locationSNMP, contactSNMP, descriptionSNMP, area);
   }
 
 
@@ -208,6 +220,7 @@ public class AssetOpenNMS {
     sb.append("    locationSNMP: ").append(toIndentedString(locationSNMP)).append("\n");
     sb.append("    contactSNMP: ").append(toIndentedString(contactSNMP)).append("\n");
     sb.append("    descriptionSNMP: ").append(toIndentedString(descriptionSNMP)).append("\n");
+    sb.append("    area: ").append(toIndentedString(area)).append("\n");
     sb.append("}");
     return sb.toString();
   }

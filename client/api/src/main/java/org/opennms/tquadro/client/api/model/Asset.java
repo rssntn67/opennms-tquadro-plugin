@@ -16,6 +16,7 @@ public class Asset {
 
     public final String systemLocation;
 
+    public final String area;
 
     @Override
     public String toString() {
@@ -28,6 +29,7 @@ public class Asset {
                 ", systemDescription='" + systemDescription + '\'' +
                 ", systemContact='" + systemContact + '\'' +
                 ", systemLocation='" + systemLocation + '\'' +
+                ", area='" + area + '\'' +
                 '}';
     }
 
@@ -40,6 +42,7 @@ public class Asset {
         this.systemLocation = builder.systemLocation;
         this.systemName = builder.systemName;
         this.systemDescription = builder.systemDescription;
+        this.area = builder.area;
     }
 
 
@@ -56,6 +59,7 @@ public class Asset {
         private String systemContact;
 
         private String systemLocation;
+        private String area;
 
         private Builder() {
         }
@@ -97,6 +101,11 @@ public class Asset {
 
         public Asset.Builder withIpAddress(InetAddress ipAddress) {
             this.ipAddress = ipAddress;
+            return this;
+        }
+
+        public Asset.Builder withArea(String area) {
+            this.area = area;
             return this;
         }
 

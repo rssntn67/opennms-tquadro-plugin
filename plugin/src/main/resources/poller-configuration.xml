@@ -13,13 +13,14 @@
 
         <service name="TQuadro" interval="3600000">
             <parameter key="label" value="${node:label}"/>
-            <parameter key="sys-object-id" value="${node:node:sys-object-id}"/>
-            <parameter key="sys-name" value="${node:node:sys-name}"/>
-            <parameter key="sys-location" value="${node:node:sys-location}"/>
-            <parameter key="sys-contact" value="${node:node:sys-contact}"/>
-            <parameter key="sys-description" value="${node:node:sys-description}"/>
+            <parameter key="sys-object-id" value="${node:sys-object-id}"/>
+            <parameter key="sys-name" value="${node:sys-name}"/>
+            <parameter key="sys-location" value="${node:sys-location}"/>
+            <parameter key="sys-contact" value="${node:sys-contact}"/>
+            <parameter key="sys-description" value="${node:sys-description}"/>
             <parameter key="alias" value="${requisition:tquadro.alias|tquadro}"/>
             <parameter key="create" value="${requisition:tquadro.create|false}"/>
+            <parameter key="area" value="${requisition:tquadro.area}"/>
         </service>
 
         <downtime begin="0" end="3600000" interval="300000"/><!-- 0, 1h, 5m -->

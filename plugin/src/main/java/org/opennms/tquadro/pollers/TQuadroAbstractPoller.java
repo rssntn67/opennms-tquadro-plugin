@@ -25,6 +25,7 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
     public static final String ALIAS_KEY = "alias";
     public static final String CREATE_KEY = "create";
     public static final String LABEL_KEY = "label";
+    public static final String AREA_KEY = "area";
 
     public static final String SYS_OBJECT_ID_KEY = "sys-object-id";
     public static final String SYS_NAME_KEY = "sys-name";
@@ -85,6 +86,8 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
             LOG.debug("Factory::getRuntimeAttributes -> create: {}, class {}", create, getPollerClassName());
             final var label = Objects.requireNonNull(pollerRequest.getPollerAttributes().get(LABEL_KEY), "Missing property: " + LABEL_KEY);
             LOG.debug("Factory::getRuntimeAttributes -> label: {}, class {}", label, getPollerClassName());
+            final var area = Objects.requireNonNull(pollerRequest.getPollerAttributes().get(AREA_KEY), "Missing property: " + AREA_KEY);
+            LOG.debug("Factory::getRuntimeAttributes -> area: {}, class {}", area, getPollerClassName());
             final var connection = this.connectionManager.getConnection(alias)
                                                          .orElseThrow(() -> new NullPointerException("Connection not found for alias: " + alias));
             LOG.debug("Factory::getRuntimeAttributes -> connection: {}, class {}", connection, getPollerClassName());
@@ -93,6 +96,7 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
             final var attrs = ImmutableMap.<String,String>builder();
             attrs.put(CREATE_KEY,create);
             attrs.put(LABEL_KEY,label);
+            attrs.put(AREA_KEY,area);
             attrs.put(ConnectionManager.TQUADRO_URL_KEY, connection.getTQuadroUrl());
             attrs.put(ConnectionManager.USERNAME_KEY, connection.getUsername());
             attrs.put(ConnectionManager.PASSWORD_KEY, connection.getPassword());
@@ -167,6 +171,12 @@ public abstract class TQuadroAbstractPoller implements ServicePoller {
             var sysDescription = Objects.requireNonNullElse(this.request.getPollerAttributes().get(SYS_DESCRIPTION_KEY), "");
             LOG.debug("Context::getSysDescription: {}", sysDescription);
             return sysDescription;
+        }
+
+        public String getArea() {
+            var area = Objects.requireNonNull(this.request.getPollerAttributes().get(AREA_KEY), "");
+            LOG.debug("Context::getArea: {}", area);
+            return area;
         }
 
         public boolean getCreate() {
