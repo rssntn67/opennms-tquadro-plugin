@@ -33,7 +33,7 @@ public class AssetOpenNMS {
   @JsonProperty("descriptionSNMP")
   private String descriptionSNMP = null;
 
-  @JsonProperty("area")
+  @JsonProperty("macroarea")
   private String area = null;
 
   public AssetOpenNMS assetId(Integer assetId) {
