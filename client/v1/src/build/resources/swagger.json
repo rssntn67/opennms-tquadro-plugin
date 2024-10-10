@@ -4327,6 +4327,10 @@
           "descriptionSNMP": {
             "type": "string",
             "nullable": true
+          },
+          "area": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
