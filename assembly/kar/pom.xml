@@ -25,7 +25,7 @@
                         </goals>
                         <configuration>
                             <featuresFile>mvn:org.opennms.plugins.tquadro/karaf-features/${project.version}/xml</featuresFile>
-                            <finalName>opennms-tquadro-plugin</finalName>
+                            <finalName>opennms-tquadro-plugin-${project.version}</finalName>
                             <ignoreDependencyFlag>true</ignoreDependencyFlag>
                             <archive>
                               <manifestEntries>
