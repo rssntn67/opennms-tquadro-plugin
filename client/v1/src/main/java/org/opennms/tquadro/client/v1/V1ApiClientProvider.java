@@ -7,7 +7,6 @@ import org.opennms.tquadro.client.api.ApiClientCredentials;
 import org.opennms.tquadro.client.api.ApiClientProvider;
 import org.opennms.tquadro.client.api.ApiClientService;
 import org.opennms.tquadro.client.v1.api.AccountApi;
-import org.opennms.tquadro.client.v1.handler.ApiClientExtension;
 import org.opennms.tquadro.client.v1.handler.ApiException;
 import org.opennms.tquadro.client.v1.model.AuthenticationUser;
 import org.opennms.tquadro.client.v1.model.LoginAPIViewModel;

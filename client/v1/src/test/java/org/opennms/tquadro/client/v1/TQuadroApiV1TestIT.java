@@ -5,7 +5,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.opennms.tquadro.client.v1.api.AccountApi;
 import org.opennms.tquadro.client.v1.api.OpenNmsApi;
-import org.opennms.tquadro.client.v1.handler.ApiClientExtension;
 import org.opennms.tquadro.client.v1.handler.ApiException;
 import org.opennms.tquadro.client.v1.model.AssetOpenNMS;
 import org.opennms.tquadro.client.v1.model.AuthenticationUser;

@@ -7,7 +7,6 @@ import org.opennms.tquadro.client.api.ApiClientService;
 import org.opennms.tquadro.client.api.TQuadroApiException;
 import org.opennms.tquadro.client.api.model.Asset;
 import org.opennms.tquadro.client.v1.api.OpenNmsApi;
-import org.opennms.tquadro.client.v1.handler.ApiClientExtension;
 import org.opennms.tquadro.client.v1.handler.ApiException;
 import org.opennms.tquadro.client.v1.model.AssetOpenNMS;
 
@@ -46,7 +45,7 @@ public class V1ApiClientService implements ApiClientService {
             body.setNameSNMP(asset.systemName);
             body.setSysObjectIdSNMP(asset.systemOid);
             body.descriptionSNMP(asset.systemDescription);
-            body.setArea(asset.area);
+//            body.setArea(asset.area);
             AssetOpenNMS saved = openNmsApi.apiOpenNMSAssetPost(body);
             return Asset.builder()
                     .withAssetId(saved.getAssetId())
@@ -57,7 +56,7 @@ public class V1ApiClientService implements ApiClientService {
                     .withSystemName(saved.getNameSNMP())
                     .withSystemOid(saved.getSysObjectIdSNMP())
                     .withSystemLocation(saved.getLocationSNMP())
-                    .withArea(saved.getArea())
+  //                  .withArea(saved.getArea())
                     .build();
         } catch (ApiException e) {
             throw new TQuadroApiException(e.getMessage(), e, e.getCode(),e.getResponseHeaders(), e.getResponseBody());
