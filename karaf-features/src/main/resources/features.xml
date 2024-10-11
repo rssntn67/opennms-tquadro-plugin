@@ -27,7 +27,7 @@
         <bundle dependency="true">mvn:com.fasterxml.jackson.module/jackson-module-jaxb-annotations/${jackson.version}</bundle>
     </feature>
 
-    <feature name="opennms-plugins-tquadro-okhttp" description="okhttp" version="${okhttp.version}">
+    <feature name="opennms-plugins-tquadro-okhttp" description="OpenNMS :: Plugins :: TQuadro OkHttp" version="${okhttp.version}">
         <bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.okio/${okio.bundle.version}</bundle>
         <bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.okhttp/${okhttp.bundle.version}</bundle>
         <bundle dependency="true">wrap:mvn:com.squareup.okhttp3/logging-interceptor/${okhttp.version}</bundle>
@@ -35,7 +35,7 @@
         <bundle dependency="true">wrap:mvn:io.gsonfire/gson-fire/${gson.fire.version}</bundle>
     </feature>
 
-    <feature name="opennms-plugins-tquadro-client-v3" description="Nutanix API v3 client" version="${project.version}">
+    <feature name="opennms-plugins-tquadro-client-v1" description="OpenNMS :: Plugins :: TQuadro v1 client" version="${project.version}">
         <feature dependency="true">aries-blueprint</feature>
         <feature version="${guava.version}" dependency="true">opennms-plugins-tquadro-guava</feature>
         <feature version="${jackson.version}" dependency="true">opennms-plugins-tquadro-jackson</feature>
