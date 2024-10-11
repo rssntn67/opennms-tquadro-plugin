@@ -61,7 +61,7 @@
         <karaf.version>4.3.10</karaf.version>
         <log4j.version>2.23.1</log4j.version>
 
-        <opennms.api.version>1.6.0</opennms.api.version>
+        <opennms.api.version>1.6.1</opennms.api.version>
         <osgi.version>7.0.0</osgi.version>
         <osgi.compendium.version>5.0.0</osgi.compendium.version>
         <osgi.enterprise.version>5.0.0</osgi.enterprise.version>

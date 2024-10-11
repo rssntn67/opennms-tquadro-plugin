@@ -32,7 +32,7 @@
     </bean>
     <service interface="org.opennms.tquadro.plugin.RestService" ref="restServiceImpl">
         <service-properties>
-            <entry key="application-path" value="/rest" />
+            <entry key="application-path" value="/rest/plugin" />
         </service-properties>
     </service>
 
