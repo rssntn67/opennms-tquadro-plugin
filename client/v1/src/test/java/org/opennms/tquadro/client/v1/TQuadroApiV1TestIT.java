@@ -81,7 +81,7 @@ public class TQuadroApiV1TestIT {
     public void opennmsApiAssetIdPutAssetIdNotExistsTest() throws ApiException{
         OpenNmsApi openNmsApi = new OpenNmsApi(getApiClient());
         try {
-            openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(7777777, "");
+            openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(7777777);
             //  204 Updated discovered date
         } catch (ApiException e) {
             Assert.assertEquals(400, e.getCode());
@@ -103,7 +103,7 @@ public class TQuadroApiV1TestIT {
     public void opennmsApiAssetIdPutAssetIdExistsTest() throws ApiException{
         OpenNmsApi openNmsApi = new OpenNmsApi(getApiClient());
         try {
-            openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(17059, "");
+            openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(17059);
         } catch (ApiException e) {
             Assert.fail();
         }
@@ -159,7 +159,7 @@ public class TQuadroApiV1TestIT {
             AssetOpenNMS response = openNmsApi.apiOpenNMSAssetPost(asset);
             Assert.assertEquals(response.getHostname(), asset.getHostname());
             Assert.assertEquals(response.getIpAddress(), asset.getIpAddress());
-            openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(response.getAssetId(), "");
+            openNmsApi.apiOpenNMSDiscoveredDateAssetIdPut(response.getAssetId());
         } catch (ApiException e) {
             System.out.println(e.getMessage());
             Assert.fail();
