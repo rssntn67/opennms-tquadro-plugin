@@ -3458,7 +3458,7 @@
             }
           },
           "400": {
-            "description": "Bad Request: Invalid IP address format"
+            "description": "Bad Request: {Invalid IP address format, macroarea null}"
           },
           "401": {
             "description": "Unauthorized: Unauthorized user"
@@ -3475,21 +3475,6 @@
           "OpenNMS"
         ],
         "summary": "",
-        "requestBody": {
-            "description": "text",
-            "content": {
-                "text/plain": {
-                  "schema": {
-                  "type": "string"
-                  }
-                },
-                "application/json": {
-                    "schema": {
-                      "type": "string"
-                    }
-                }
-            }
-        },
         "parameters": [
           {
             "name": "assetId",
@@ -4328,7 +4313,7 @@
             "type": "string",
             "nullable": true
           },
-          "area": {
+          "macroarea": {
             "type": "string",
             "nullable": true
           }
